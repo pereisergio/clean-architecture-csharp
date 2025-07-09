@@ -1,6 +1,8 @@
 ## .gitignore para projetos .NET, Visual Studio e VS Code
 ## Baseado nos templates oficiais do GitHub
 
+docs
+
 # Build results
 [Dd]ebug/
 [Dd]ebugPublic/
