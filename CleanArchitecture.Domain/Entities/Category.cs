@@ -1,5 +1,5 @@
-﻿using CleanArchitecture.Domain.Validation;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using CleanArchitecture.Domain.Validation;
 
 namespace CleanArchitecture.Domain.Entities
 {

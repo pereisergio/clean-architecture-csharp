@@ -1,5 +1,3 @@
-using System;
-
 namespace CleanArchitecture.WebUI.Models
 {
     public class ErrorViewModel
