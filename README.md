@@ -11,6 +11,8 @@
   - [CleanArchitecture.Infrastructure.Data](#cleanarchitectureinfrastructuredata)
   - [CleanArchitecture.Infrastructure.IoC](#cleanarchitectureinfrastructureioc)
   - [CleanArchitecture.WebUI](#cleanarchitecturewebui)
+- [Detalhes da Camada Domain](#detalhes-da-camada-domain)
+- [Detalhes da Camada Infrastructure](#detalhes-da-camada-infrastructure)
 - [Regras de Negócio](#regras-de-negócio)
   - [Produto](#produto)
   - [Categoria](#categoria)
@@ -86,6 +88,67 @@ CleanArchitecture.sln
 - **ViewModels**: Modelos de dados para exibição
 - **MapConfig**: Configuração de mapeamento
 - **Responsabilidade**: Interface com o usuário, recebendo requisições, exibindo dados e interagindo com a camada de aplicação.
+
+## Detalhes da Camada Domain
+
+A camada **CleanArchitecture.Domain** é responsável por representar os conceitos e regras de negócio do sistema, isolando o domínio do restante da aplicação.
+
+- **Entities**: Contém as classes `Category` e `Product` que representam o modelo de domínio.
+- **Interfaces**: Define contratos como `ICategoryRepository` e `IProductRepository`.
+- **Validation**: Inclui a classe `DomainExceptionValidation` para garantir a validade das entidades.
+
+**Objetivo:**
+Criar um modelo de domínio não anêmico, isolado do mundo externo, garantindo que as entidades estejam sempre em um estado válido.
+
+**Recursos Utilizados:**
+- Classes `sealed`
+- Setters privados
+- Construtores parametrizados
+- Classe base de entidade
+- Validação e comportamentos no modelo
+- Testes de unidade com xUnit e FluentAssertions
+
+**Exemplo de Teste de Unidade:**
+```csharp
+[Fact(DisplayName = "Create Category Object With Valid State")]
+public void CreateCategory_WithValidParameters_ResultObjectValidState()
+{
+    Action action = () => new Category(1, "Category Name");
+    action.Should().NotThrow<DomainExceptionValidation>();
+}
+```
+
+## Detalhes da Camada Infrastructure
+
+A camada **CleanArchitecture.Infrastructure.Data** é responsável pela implementação da persistência de dados e integração com recursos externos.
+
+- **Context**: Define o `ApplicationDbContext` (herda de `DbContext` do EF Core).
+- **EntitiesConfiguration**: Configurações Fluent API das entidades.
+- **Repositories**: Implementação das interfaces de repositório (`CategoryRepository`, `ProductRepository`).
+- **Identity**: Recursos de autenticação e autorização.
+
+**Responsabilidades:**
+- Implementar o acesso a dados usando Entity Framework Core.
+- Gerenciar migrações e contexto do banco de dados.
+- Isolar detalhes de infraestrutura das demais camadas.
+
+**Exemplo de ApplicationDbContext:**
+```csharp
+public class ApplicationDbContext : DbContext
+{
+    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+        : base(options) { }
+
+    public DbSet<Product> Products { get; set; }
+    public DbSet<Category> Categories { get; set; }
+
+    protected override void OnModelCreating(ModelBuilder builder)
+    {
+        base.OnModelCreating(builder);
+        builder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
+    }
+}
+```
 
 ## Regras de Negócio
 ### Produto
