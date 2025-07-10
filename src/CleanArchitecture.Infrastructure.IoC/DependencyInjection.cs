@@ -14,7 +14,7 @@ namespace CleanArchitecture.Infrastructure.IoC
             IConfiguration configuration)
         {
             services.AddDbContext<ApplicationDbContext>(options =>
-             options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"
+             options.UseSqlite(configuration.GetConnectionString("DefaultConnection"
             ), b => b.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName)));
 
             services.AddScoped<ICategoryRepository, CategoryRepository>();
