@@ -1,4 +1,5 @@
 ﻿using CleanArchitecture.Domain.Entities;
+
 using Microsoft.EntityFrameworkCore;
 
 namespace CleanArchitecture.Infrastructure.Data.Context

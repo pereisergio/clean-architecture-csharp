@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+
 using CleanArchitecture.Domain.Validation;
 
 namespace CleanArchitecture.Domain.Entities
