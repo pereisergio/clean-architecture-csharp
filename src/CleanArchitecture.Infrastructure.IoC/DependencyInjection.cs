@@ -1,4 +1,4 @@
-﻿using CleanArchitecture.Domain.Interfaces;
+using CleanArchitecture.Domain.Interfaces;
 using CleanArchitecture.Infrastructure.Data.Context;
 using CleanArchitecture.Infrastructure.Data.Repositories;
 
