@@ -12,8 +12,4 @@
     <ProjectReference Include="..\CleanArchitecture.Domain\CleanArchitecture.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Mappings\" />
-  </ItemGroup>
-
 </Project>
